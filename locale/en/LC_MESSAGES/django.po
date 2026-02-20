@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-14 07:56+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\core\settings.py:120
+msgid "English"
+msgstr ""
+
+#: .\core\settings.py:121
+msgid "Arabic"
+msgstr ""
+
+#: templates/index.html:40
+
+msgid "الرئيسية"
+msgstr "Home"
+
+msgid "المهارات"
+msgstr "Skills"
+
+msgid "المشاريع"
+msgstr "Projects"
+
+msgid "تواصل"
+msgstr "Contact"
+
+#: templates/index.html:45
+msgid "أهلا بك, أنا"
+msgstr "Hello, I'm"
+
+msgid "السيرة الذاتية"
+msgstr "Resume"
+
+msgid "للتواصل"
+msgstr "Contact"
+
+#: templates/index.html:50
+msgid "المهارات والأدوات"
+msgstr "Skills & Tools"
+
+msgid "مجموعة من التقنيات والأدوات التي أتقنها لبناء تطبيقات ويب احترافية"
+msgstr "A set of techniques and tools I have mastered for building professional web applications"
+
+#: templates/index.html:55
+msgid "أحدث المشاريع"
+msgstr "Latest Projects"
+
+msgid "مجموعة من المشاريع التي قمت بتطويرها باستخدام أحدث التقنيات"
+msgstr "A collection of projects I developed using the latest technologies"
+
+msgid "عرض التفاصيل"
+msgstr "View details"
+
+msgid "مميزات المشروع"
+msgstr "Project features"
+
+#: templates/index.html:60
+msgid "معاينة مباشرة"
+msgstr "Live"
+
+msgid "كود المشروع"
+msgstr "github"
+
+#: templates/index.html:65
+msgid "اتصل بي"
+msgstr "Get in Touch"
+
+msgid "لا تتردد في التواصل معي لأي استفسار أو فرصة عمل محتملة. أنا دائمًا متحمس للتعاون في مشاريع جديدة ومثيرة"                
+msgstr "Feel free to contact me with any questions or potential business opportunities. I'm always eager to collaborate on new and exciting projects"
+
+msgid "موقعي"
+msgstr "Location"
+
+msgid "البريد الإلكتروني"
+msgstr "Email"
+
+msgid "رقم الهاتف"
+msgstr "Phone"
+
+
+
+msgid "تحميل السيرة الذاتية"
+msgstr "Download The Resume"
+
+msgid "اسمك"
+msgstr "Your Name"
+
+msgid "بريدك الإلكتروني"
+msgstr "Your email@example.com"
+
+msgid "الموضوع"
+msgstr "Project consultation, collaboration, etc."
+
+msgid "أخبرني عن مشروعك"
+msgstr "Tell me about your project, timeline, and any specific requirements..."
+
+msgid "إرسال الرسالة"
+msgstr "Send Message"
+
+msgid "مطور برمجيات متحمس لإنشاء حلول تقنية مبتكرة تحدث فرقًا في العالم الرقمي"
+msgstr "A software developer passionate about creating innovative technological solutions that make a difference in the digital world"
