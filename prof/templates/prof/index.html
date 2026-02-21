@@ -150,10 +150,18 @@
             font-weight: 700;
         }
 
+        html[lang="en"] .brand-text h1 {
+            font-size: 0.95rem;
+        }
+
         .brand-text p {
             font-size: 0.8rem;
             margin: 0;
             color: rgba(255, 255, 255, 0.9);
+        }
+
+        html[lang="en"] .brand-text p {
+            font-size: 0.7rem;
         }
 
         .nav-link {
@@ -369,28 +377,6 @@
 
 
 
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .skills-grid {
-                gap: 20px;
-                padding: 15px 0;
-            }
-
-            .skill-card {
-                flex: 0 0 120px;
-                min-width: 120px;
-                padding: 20px 15px;
-            }
-
-            .skill-icon {
-                font-size: 2rem;
-            }
-
-            .skill-name {
-                font-size: 0.85rem;
-            }
         }
 
         /* Skills Section */
@@ -418,7 +404,10 @@
         }
 
         .skills-grid {
-            display: flex;
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-auto-flow: column;
+            grid-auto-columns: 140px;
             gap: 30px;
             overflow-x: auto;
             padding: 20px 0;
@@ -588,38 +577,62 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
             border: 2px solid transparent;
             display: flex;
             flex-direction: column;
             height: 100%;
-            overflow: hidden; 
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.7s ease;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(30, 77, 183, 0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(30, 77, 183, 0.2);
             border-color: var(--primary-color);
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
         }
 
         .project-image {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .project-card:hover .project-image {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(2deg);
         }
 
         .project-content {
             padding: 30px;
             display: flex;
             flex-direction: column;
-            flex: 1; 
-    
+            flex: 1;
+
         }
 
         .project-title {
@@ -671,7 +684,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: auto; 
+            margin-top: auto;
             align-self: stretch;
         }
 
@@ -1037,7 +1050,45 @@
             }
         }
 
-        /* Contact Section */
+        /* Scroll Reveal Animation base classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contact Section with Animated Gradient */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(248, 250, 255, 1), rgba(224, 231, 255, 0.6), rgba(248, 250, 255, 1));
+            background-size: 200% 200%;
+            animation: gradient-shift 10s ease infinite;
+        }
+
+        body.dark-mode .contact-section {
+            background: linear-gradient(135deg, var(--bg-dark), rgba(30, 77, 183, 0.1), var(--bg-dark));
+            background-size: 200% 200%;
+            animation: gradient-shift 10s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .contact-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1189,6 +1240,33 @@
             font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.7);
         }
+
+        @media (max-width: 991px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-rows: repeat(3, 1fr);
+                grid-auto-columns: 120px;
+                gap: 20px;
+                padding: 15px 0;
+            }
+
+            .skill-card {
+                flex: 0 0 120px;
+                min-width: 120px;
+                padding: 20px 15px;
+            }
+
+            .skill-icon {
+                font-size: 2rem;
+            }
+
+            .skill-name {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 
 </head>
@@ -1311,17 +1389,19 @@
 
 
     <!-- Projects Section -->
-    <section class="projects-section" id="projects">
+    <section class="projects-section reveal" id="projects">
         <div class="container">
-            <h2 class="section-title"> {% trans "أحدث المشاريع" %}</h2>
-            <p class="section-subtitle"> {% trans "مجموعة من المشاريع التي قمت بتطويرها باستخدام أحدث التقنيات" %}</p>
+            <h2 class="section-title reveal"> {% trans "أحدث المشاريع" %}</h2>
+            <p class="section-subtitle reveal"> {% trans "مجموعة من المشاريع التي قمت بتطويرها باستخدام أحدث التقنيات" %}</p>
 
             <div class="projects-grid">
                 <!-- Project  -->
                 {% for pr in projects %}
-               
-                <div class="project-card" data-id="{{pr.id}}">
-                    <img src="{{pr.main_image.url}}" alt="{{pr.title}}" class="project-image">
+
+                <div class="project-card reveal" data-id="{{pr.id}}">
+                    <div class="project-image-container">
+                        <img src="{{pr.main_image.url}}" alt="{{pr.title}}" class="project-image">
+                    </div>
                     <div class="project-content">
                         <h3 class="project-title">{{pr.title}}</h3>
                         <p class="project-description">{{pr.description|truncatewords:20}}</p>
@@ -1353,7 +1433,7 @@
 
             <div class="project-gallery">
                 <div id="galleryImages">
-                   
+
                 </div>
                 <button class="gallery-nav gallery-prev" id="prevImg">
                     <i class="bi bi-chevron-left"></i>
@@ -1369,7 +1449,7 @@
                 <p class="modal-project-subtitle" id="modalSubtitle"></p>
 
                 <div class="modal-tech-tags" id="modalTech">
-                   
+
                 </div>
 
                 <div class="modal-description">
@@ -1379,7 +1459,7 @@
                 <div class="modal-features">
                     <h4> {% trans "مميزات المشروع" %}</h4>
                     <ul id="modalFeatures">
-                        
+
                     </ul>
                 </div>
 
@@ -1396,14 +1476,12 @@
     </div>
 
     <!-- Contact Section -->
-    <section class="contact mb-5" id="contact">
+    <section class="contact contact-section reveal mb-5" id="contact">
         <div class="container">
-            <div class="animate-on-scroll">
-                <h2 class="section-title"> {% trans "اتصل بي" %}</h2>
-                <p class="section-subtitle">
-                    {% trans "لا تتردد في التواصل معي لأي استفسار أو فرصة عمل محتملة. أنا دائمًا متحمس للتعاون في مشاريع جديدة ومثيرة" %}
-                </p>
-            </div>
+            <h2 class="section-title reveal"> {% trans "اتصل بي" %}</h2>
+            <p class="section-subtitle reveal">
+                {% trans "لا تتردد في التواصل معي لأي استفسار أو فرصة عمل محتملة. أنا دائمًا متحمس للتعاون في مشاريع جديدة ومثيرة" %}
+            </p>
 
             <div class="contact-container">
                 <div class="contact-info">
@@ -1496,6 +1574,34 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Scroll Reveal logic using IntersectionObserver
+        document.addEventListener("DOMContentLoaded", function () {
+            const reveals = document.querySelectorAll(".reveal");
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function (
+                entries,
+                observer
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+    </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -1544,7 +1650,7 @@
     let currentImgIndex = 0;
     let projectImages = [];
 
-   
+
     function updateGallery() {
         const images = galleryImages.querySelectorAll('.gallery-image');
         if (images.length === 0) return;
@@ -1552,17 +1658,17 @@
         images.forEach((img, index) => {
             if (index === currentImgIndex) {
                 img.classList.add('active');
-                img.style.display = 'block'; 
+                img.style.display = 'block';
             } else {
                 img.classList.remove('active');
-                img.style.display = 'none'; 
+                img.style.display = 'none';
             }
         });
 
         galleryCounter.textContent = `${currentImgIndex + 1} / ${images.length}`;
     }
 
-    
+
     async function openProjectModal(projectId) {
         projectModal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -1575,7 +1681,7 @@
         const techContainer = document.getElementById('modalTech');
         const featuresContainer = document.getElementById('modalFeatures');
 
-       
+
         modalTitle.textContent = "جاري تحميل التفاصيل...";
         modalSubtitle.textContent = "";
         modalDesc.textContent = "";
@@ -1583,7 +1689,7 @@
         featuresContainer.innerHTML = '';
         galleryImages.innerHTML = '';
 
-        
+
         prevImg.style.display = 'none';
         nextImg.style.display = 'none';
         galleryCounter.style.display = 'none';
@@ -1613,14 +1719,14 @@
                     data.tech.forEach(tech => {
                         if (tech.trim() !== "") {
                             const span = document.createElement('span');
-                            span.className = 'modal-tech-tag'; 
+                            span.className = 'modal-tech-tag';
                             span.textContent = tech.trim();
                             techContainer.appendChild(span);
                         }
                     });
                 }
 
-                
+
                 if (data.features && data.features.length > 0) {
                     data.features.forEach(feature => {
                         if (feature.trim() !== "") {
@@ -1631,7 +1737,7 @@
                     });
                 }
 
-          
+
                 if (data.images && data.images.length > 0) {
                     projectImages = data.images;
                     galleryImages.innerHTML = '';
@@ -1639,7 +1745,7 @@
                     projectImages.forEach((src, index) => {
                         const img = document.createElement('img');
                         img.src = src.trim();
-                        img.className = `gallery-image`; 
+                        img.className = `gallery-image`;
                         img.style.display = index === 0 ? 'block' : 'none';
                         galleryImages.appendChild(img);
                     });
@@ -1668,7 +1774,7 @@
         }
     }
 
-  
+
     closeModal.addEventListener('click', () => {
         projectModal.classList.remove('active');
         document.body.style.overflow = '';
@@ -1726,14 +1832,14 @@
             }
         }
 
-      
+
         function changeLanguage() {
             const currentLang = htmlElement.getAttribute('lang');
             const newLang = currentLang === 'ar' ? 'en' : 'ar';
 
             localStorage.setItem('language', newLang);
 
-           
+
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '{% url "set_language" %}';
@@ -1753,7 +1859,7 @@
             form.submit();
         }
 
-     
+
         function applyLocalSettings() {
             const currentLang = '{{ CURRENT_LANGUAGE }}';
             htmlElement.setAttribute('lang', currentLang);
@@ -1784,7 +1890,7 @@
 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    const offset = 80; 
+                    const offset = 80;
                     const targetPosition = targetElement.offsetTop - offset;
 
                     window.scrollTo({
@@ -1799,7 +1905,7 @@
         const navLinks = document.querySelectorAll('.navbar a[href^="#"]');
 
         function updateActiveLink() {
-            const scrollPosition = window.scrollY + 100; 
+            const scrollPosition = window.scrollY + 100;
 
             navLinks.forEach(link => link.classList.remove('active'));
             sections.forEach(section => {
@@ -1839,7 +1945,7 @@
         });
     }, observerOptions);
 
-   
+
     document.querySelectorAll('section').forEach(section => {
         observer.observe(section);
     });

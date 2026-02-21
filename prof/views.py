@@ -8,9 +8,6 @@ def home(request):
     skills = Skills.objects.all()
     projects = Project.objects.prefetch_related('tech', 'images').all()
     social = SocialLink.objects.all()
-
-    for p in projects:
-       print(p.images.all)
     context = {
         'profile': profile,
         'skills': skills,
@@ -25,20 +22,14 @@ def home(request):
 def get_project_details(request, pk):
     try:
         project = Project.objects.get(id=pk)
-        
-        # تجهيز بيانات التقنيات
         tech_list = [t.name for t in project.tech.all()]
-        
-        # تجهيز بيانات الصور
         images_list = [img.image.url for img in project.images.all()]
-        
-        # تجهيز المميزات (نفترض أنها مفصولة بأسطر جديدة \n)
         features_list = project.propertys.split('-') if project.propertys else []
 
         data = {
             'success': True,
             'title': project.title,
-            'subtitle': project.kind, # أو الحقل الذي تستخدمه للعنوان الفرعي
+            'subtitle': project.kind, 
             'description': project.description,
             'tech': tech_list,
             'features': features_list,
